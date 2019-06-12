@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lokmacı Generator</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <style>
+        body, html {
+            height: 100%;
+        }
+        a {
+            font-size: 16px;
+        }
+    </style>
+    <script src="/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/axios.min.js"></script>
+</head>
+<body>
+
+<section class="h-100" id="lokmaci">
+    <article class="container h-100">
+        <div class="d-flex align-items-center justify-content-center h-100">
+            <div class="d-flex flex-column">
+                <h1 class="text align-self-center p-4">lokmanın tadına varmak için lokmacı üret</h1>
+                <button class="btn btn-danger align-self-center p-2" type="button" @click="generateLokmaci">{{ gen }}
+                </button>
+                <h1 class="text-success align-self-center p-1" v-if="lokmaci != null">👉🏻 {{ lokmaci }}</h1>
+                <a class="text-success align-self-center p-1" :href="`https://${lokmaci}.com`" v-if="lokmaci != null">lokma siparisi ver</a>
+            </div>`
+        </div>
+    </article>
+    <span class="align-baseline">bottom</span>
+</section>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
