@@ -29,8 +29,10 @@
                 <h1 class="text align-self-center p-4">lokmanın tadına varmak için lokmacı üret</h1>
                 <button class="btn btn-danger align-self-center p-2" type="button" @click="generateLokmaci">{{ gen }}
                 </button>
-                <h1 class="text-success align-self-center p-1" v-if="lokmaci != null">👉🏻 {{ lokmaci }}</h1>
-                <a class="text-success align-self-center p-1" :href="`https://${lokmaci}.com`" v-if="lokmaci != null">lokma siparisi ver</a>
+                <h1 class="text-success align-self-center p-3" v-if="lokmaci != null">👇🏻</h1>
+                <h1 class="text-success align-self-center p-1" v-if="lokmaci != null">{{ lokmaci.name }}</h1>
+                <h6 class="text-danger align-self-center p-1" v-if="lokmaci != null">{{ lokmaci.address }}</h6>
+                <a class="text-capitalize align-self-center p-1" :href="`https://${lokmaci.name}.com`" v-if="lokmaci != null">siparisi ver</a>
             </div>`
         </div>
     </article>

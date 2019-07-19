@@ -1,5 +1,6 @@
 package com.caysever.lokmaci
 
+import com.github.javafaker.Faker
 import groovy.transform.builder.Builder
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -31,12 +32,21 @@ class LokmaciController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Mono<String> createLokmaci() {
-        Mono.just(LokmaciRandom.builder().pool(consonants).count(1).build().gen())
-                .map { it.concat(LokmaciRandom.builder().pool(vowels).count(1).build().gen()) }
-                .map { it.concat(LokmaciRandom.builder().pool(consonants).count(1).build().gen()) }
-                .map { "LOKMA$it" }
-                .map { (it as String).toUpperCase() }
+    Mono<Map> createLokmaci() {
+        def name = buildName()
+        def address = buildAddress()
+
+        return Mono.just([name: (name), address: (address.fullAddress())])
+    }
+
+    def buildAddress() {
+        Faker faker = new Faker(new Locale("tr"))
+        return faker.address()
+    }
+
+    def buildName() {
+        def suffix = LokmaciRandom.gen(consonants, 1) + LokmaciRandom.gen(vowels, 1) + LokmaciRandom.gen(consonants, 1)
+        return "LOKMA$suffix".toString().toUpperCase()
     }
 }
 
@@ -54,13 +64,12 @@ class LokmaciWebFilter implements WebFilter {
 }
 
 @Builder
-@Component
 class LokmaciRandom {
 
     String pool
     int count
 
-    String gen() {
+    static String gen(String pool, Integer count) {
         StringBuilder builder = new StringBuilder(8)
 
         count.times {
